@@ -1,50 +1,91 @@
-# Welcome to your Expo app 👋
+Documentação do Sistema de Controle de Ordens de Serviço
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
+Visão Geral
 
-1. Install dependencies
+Este é um aplicativo mobile desenvolvido com React Native, utilizando Expo para facilitar a criação, testes e build do projeto. O app permite gerenciar ordens de serviço, além de controlar receitas e despesas do setor administrativo.
 
-   ```bash
-   npm install
-   ```
 
-2. Start the app
+Tecnologias Utilizadas:
+- React Native;
+- Expo;
+- Expo Router;
+- Firebase Firestore;
+- Firebase SDK;
 
-   ```bash
-    npx expo start
-   ```
 
-In the output, you'll find options to open the app in a
+Estrutura do Projeto
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+A estrutura do projeto segue a organização padrão do Expo, com a separação das telas e configuração do Firebase.
+- firebase.js → Configuração do Firebase Firestore
+- App.js → Arquivo principal, configura a navegação
+- app/ordens.js → Lista as ordens de serviço cadastradas
+- app/nova-ordem.js → Tela para criar uma nova ordem de serviço
+- app/editar-ordem.js → Tela para editar uma ordem existente
+- app/administrativo.js → Tela principal do administrativo
+- app/caixa.js → Tela que exibe receitas e despesas do mês selecionado
+- app/cadastrar-receita.js → Tela para adicionar uma nova receita
+- app/cadastrar-despesa.js → Tela para adicionar uma nova despesa
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+Navegação
 
-When you're ready, run:
+O app utiliza expo-router para gerenciar a navegação, seguindo um modelo baseado na estrutura de arquivos e diretórios do projeto. Cada arquivo dentro da pasta app/ representa uma rota, permitindo navegação automática.
 
-```bash
-npm run reset-project
-```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Fluxo do Usuário
 
-## Learn more
+1- Tela Inicial:
+Exibe dois botões principais: Ordens de Serviço e Administrativo.
 
-To learn more about developing your project with Expo, look at the following resources:
+2- Ordens de Serviço:
+Lista todas as OS cadastradas;
+Permite adicionar uma nova OS;
+Ao clicar em uma OS, leva para a tela de edição.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+3- Nova OS
+Formulário para cadastrar uma nova ordem de serviço;
+O número da OS é gerado automaticamente com base no contador armazenado no Firebase.
 
-## Join the community
+4- Editar OS
+Permite alterar os dados da OS;
+Adiciona novos campos como diagnóstico, valor do serviço e data de saída;
+O status pode ser alterado para pendente, orçamento realizado, serviço autorizado ou concluído.
 
-Join our community of developers creating universal apps.
+5- Administrativo
+Tela com três opções: Caixa, Cadastrar Receita e Cadastrar Despesa.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+6- Caixa
+Exibe receitas e despesas de um mês selecionado;
+Calcula e exibe o saldo total.
+
+7- Cadastrar Receita/Despesa
+Formulários para adicionar novas receitas ou despesas ao sistema.
+
+
+Persistência de Dados
+
+O sistema usa Firebase Firestore como banco de dados, garantindo armazenamento em nuvem e sincronização em tempo real.
+
+
+Coleções no Firestore
+
+- ordens_servico → Contém todas as ordens de serviço cadastradas
+- receitas → Contém os registros de receitas
+- despesas → Contém os registros de despesas
+- contador → Documento único que armazena contador_os, utilizado para gerar o número da OS automaticamente
+
+
+Como Rodar o Projeto
+
+1- Instale as dependências:
+
+npm install
+
+2- Inicie o projeto no Expo:
+
+expo start
+
+3- Configure a conexão com o Firebase.
+
+4- Escaneie o QR Code no Expo Go para testar no celular ou rode no emulador.
